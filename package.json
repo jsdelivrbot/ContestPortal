@@ -6,7 +6,7 @@
   "repository": "gi://gitlab.com/rajat1881/understanding-react.git",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test --host 0.0.0.0 --public http://localhost:8080",
     "test:watch": "npm run test -- --watch"
   },
   "author": "",
@@ -32,7 +32,7 @@
     "react-dom": "^0.14.3",
     "react-redux": "4.3.0",
     "react-router": "^2.0.1",
-    "redux": "^3.0.4",
-    "youtube-api-search": "0.0.5"
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.0.4"
   }
 }
