@@ -38,15 +38,16 @@ const submission = ()=>{
 
 };
 
+
 class ProblemDescription extends Component{
     constructor(props){
         super(props);
-        console.log(this.props);
-        getProblem(this.props.probCode);
+        console.log(this.props.match.params.code);
+        getProblem(this.props.match.params.code);
     }
     render(){
 
-        getProblem(this.props.probCode);
+        getProblem(this.props.match.params.code);
         return(
             <div>
                 <h3 id="probName">Problem Name</h3>
@@ -66,7 +67,31 @@ class ProblemDescription extends Component{
                     </div>
 
                 </form>
-                <button onClick = {submission}>Submit</button>
+                <button onClick = {()=>{
+                    let code = this.props.match.params.code;
+                    let e = document.getElementById("language");
+                    let lang = e.options[e.selectedIndex].value;
+                    let src = document.getElementById("codeArea").value;
+                    fetch("http://5f143cd2.problems.sphere-engine.com/api/v3/submissions?access_token=358102489eab046820e65ce57ec00ee1", {
+                        method: "post" ,
+                        headers: {
+                            "Content-type": "application/x-www-form-urlencoded"
+                        },
+                        body: "problemCode="+this.props.match.params.code+"&source="+src+"&compilerId="+lang
+                    })
+                        .then(response=>{return response.json();})
+                        .then(function(data){
+                            console.log("Request " ,data);
+                            window.location = "http://localhost:8080/contest/"+code+"/"+data.id;
+                        })
+                        .catch(function(error){
+                            console.log("failed", error);
+                        });
+
+
+                }}>Submit</button>
+
+
             </div>
         );
     }

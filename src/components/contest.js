@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import Timer from './timer.js';
 import ProblemList from './problemlist';
-import ProblemDescription from './problemdescription';
+import ContestBody from './contestBody';
 
 class Contest extends Component{
     constructor(props){
@@ -10,11 +10,12 @@ class Contest extends Component{
     }
 
     render(){
+        console.log(this.props.match.params.code);
         return(
             <div>
                 <Timer/>
                 <ProblemList />
-                <ProblemDescription probCode={this.props.match.params.code}/>
+                <ContestBody probCode = {this.props.match.params.code}/>
             </div>
         )
     }
